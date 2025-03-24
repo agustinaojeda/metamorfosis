@@ -424,7 +424,7 @@ footer a {
 }
 
 .btn {
-    background-color: #DACCBE;
+    background-color: #f7f9f6;
     color: #1a1318;
     padding: 10px 20px;
     border-radius: 10px;
@@ -450,7 +450,7 @@ footer img:hover {
 
 footer p {
     font-size: 16px;
-    color: #DACCBE;
+    color: #f7f9f6;
     font-weight: 600;
     letter-spacing: 0.2px;
     max-width: 150px;
