@@ -82,6 +82,7 @@ nav img {
     position: relative;
     padding-top: 60px;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 
 .videoFondo {
@@ -184,7 +185,7 @@ nav img {
     font-weight: 600;
     color: #1a1318;
     text-align: center;
-    padding: 20px;
+    margin: 30px;
 }
 
 .texto {
@@ -229,6 +230,8 @@ nav img {
 .blq3 {
     background-color: #DACCBE;
     text-align: center;
+    margin-top: -4px;
+    padding-top: 15px;
 }
 
 .titulo {
@@ -392,6 +395,7 @@ nav img {
 
 footer {
     background-color: #1a1318;
+    /* Fondo blanco */
     padding: 20px 150px;
     text-align: center;
     font-size: 14px;
