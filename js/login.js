@@ -1,25 +1,39 @@
-const handleLogin = () => {
-    const passwordInput = document.querySelector('input');
-    const password = passwordInput.value;
-    let errorMsg = document.querySelector('.error-message');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
 
-    if (!errorMsg) {
-        errorMsg = document.createElement('div');
-        errorMsg.classList.add('error-message');
-        passwordInput.parentNode.insertBefore(errorMsg, passwordInput.nextSibling);
-    }
+const app = express();
+const PORT = 5500;
 
+app.use(express.urlencoded({ extended: true })); // Para recibir datos del formulario
+app.use(session({
+    secret: 'clave_secreta',  // Clave secreta para las sesiones
+    resave: false,
+    saveUninitialized: true
+}));
+
+// Servir archivos estáticos (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta para manejar el login
+app.post('/login', (req, res) => {
+    const { password } = req.body;
     if (password === 'aylih') {
-        window.location.href = 'bienvenido.html';
+        req.session.loggedIn = true;
+        res.redirect('/bienvenido.html');
     } else {
-        errorMsg.textContent = 'Contraseña incorrecta. Inténtalo de nuevo.';
-        errorMsg.style.color = 'red';
-        passwordInput.style.borderColor = 'red';
+        res.send('<script>alert("Clave incorrecta"); window.location.href = "/";</script>');
     }
-};
+});
 
-document.querySelector('button').addEventListener('click', handleLogin);
+// Middleware para proteger bienvenido.html
+app.use('/bienvenido.html', (req, res, next) => {
+    if (!req.session.loggedIn) {
+        return res.redirect('/');
+    }
+    next();
+});
 
-document.querySelector('input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleLogin();
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

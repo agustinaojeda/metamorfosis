@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -12,11 +13,19 @@
       <div class="izq">
         <img src="media/logo n.svg" alt="" class="logo" />
         <h2>¿Sos miembro?</h2>
-        <input type="password" placeholder="Ingrese la contraseña" />
-        <button>Ingresar</button>
+   
+        <form action="login.php" method="POST">
+          <input type="password" name="password" required />
+          <button type="submit">Ingresar</button>
+        </form>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            <p class="error"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></p>
+          <?php endif; ?>
+
         <a
           href="https://api.whatsapp.com/send?phone=542604598220&text=Hola%2C%20quiero%20ser%20parte%20de%20Metamorfosis!"
-          >¿Aún no sos parte? <b>Quiero serlo</b></a
+           target="_blank">¿Aún no sos parte? <b>Quiero serlo</b></a
         >
       </div>
       <div class="der">
